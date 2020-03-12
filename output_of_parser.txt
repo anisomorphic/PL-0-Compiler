@@ -1,0 +1,387 @@
+To verify functionality: included is a run where an invalid filename is passed,
+and a run where no arguments are chosen, only showing in and out. [from hw3.doc]
+__________________________
+
+
+mi051467@net1547:~/pm0$ gcc hw4compiler.c -o compile && ./compile -l -a -v input_to_scanner.txt_invalid
+Please pass a valid PL/0 code file as the final parameter.
+mi051467@net1547:~/pm0$ gcc hw4compiler.c -o compile && ./compile input_to_scanner.txt
+
+Program Output and Input (if prompted)
+9
+mi051467@net1547:~/pm0$ gcc hw4compiler.c -o compile && ./compile -l -a -v input_to_scanner.txt
+Source Program:input_to_scanner.txt
+var x,y,z,v,w;
+procedure a;
+  var x,y,u,v;
+  procedure b;
+    var y,z,v;
+    procedure c;
+      var y,z;
+      begin
+        z:=1;
+        x:=y+z+w
+      end;
+    begin
+      y:=x+u+w;
+      call c;
+    end;
+  begin
+    z:=2;
+    u:=z+w;
+    call b;
+  end;
+begin
+  x:=1; y:=2; z:=3; v:=4; w:=5;
+  x:=v+w;
+  write x;
+  call a;
+end.
+
+
+Lexeme Table:
+lexeme          token type
+var             29
+x               2
+,               17
+y               2
+,               17
+z               2
+,               17
+v               2
+,               17
+w               2
+;               18
+procedure               30
+a               2
+;               18
+var             29
+x               2
+,               17
+y               2
+,               17
+u               2
+,               17
+v               2
+;               18
+procedure               30
+b               2
+;               18
+var             29
+y               2
+,               17
+z               2
+,               17
+v               2
+;               18
+procedure               30
+c               2
+;               18
+var             29
+y               2
+,               17
+z               2
+;               18
+begin           21
+z               2
+:=              20
+1               3
+;               18
+x               2
+:=              20
+y               2
++               4
+z               2
++               4
+w               2
+end             22
+;               18
+begin           21
+y               2
+:=              20
+x               2
++               4
+u               2
++               4
+w               2
+;               18
+call            27
+c               2
+;               18
+end             22
+;               18
+begin           21
+z               2
+:=              20
+2               3
+;               18
+u               2
+:=              20
+z               2
++               4
+w               2
+;               18
+call            27
+b               2
+;               18
+end             22
+;               18
+begin           21
+x               2
+:=              20
+1               3
+;               18
+y               2
+:=              20
+2               3
+;               18
+z               2
+:=              20
+3               3
+;               18
+v               2
+:=              20
+4               3
+;               18
+w               2
+:=              20
+5               3
+;               18
+x               2
+:=              20
+v               2
++               4
+w               2
+;               18
+write           31
+x               2
+;               18
+call            27
+a               2
+;               18
+end             22
+.               19
+
+Lexeme List:
+29 2 x 17 2 y 17 2 z 17 2 v 17 2 w 18 30 2 a 18 29 2 x 17 2 y 17 2 u 17 2 v 18 30 2 b 18 29 2 y 17 2 z 17 2 v 18 30 2 c 18 29 2 y 17 2 z 18 21 2 z 20 3 1 18 2 x 20 2 y 4 2 z 4 2 w 22 18 21 2 y 20 2 x 4 2 u 4 2 w 18 27 2 c 18 22 18 21 2 z 20 3 2 18 2 u 20 2 z 4 2 w 18 27 2 b 18 22 18 21 2 x 20 3 1 18 2 y 20 3 2 18 2 z 20 3 3 18 2 v 20 3 4 18 2 w 20 3 5 18 2 x 20 2 v 4 2 w 18 31 2 x 18 27 2 a 18 22 19
+
+Tokens:
+29 2 x 17 2 y 17 2 z 17 2 v 17 2 w 18 30 2 a 18 29 2 x 17 2 y 17 2 u 17 2 v 18 30 2 b 18 29 2 y 17 2 z 17 2 v 18 30 2 c 18 29 2 y 17 2 z 18 21 2 z 20 3 1 18 2 x 20 2 y 4 2 z 4 2 w 22 18 21 2 y 20 2 x 4 2 u 4 2 w 18 27 2 c 18 22 18 21 2 z 20 3 2 18 2 u 20 2 z 4 2 w 18 27 2 b 18 22 18 21 2 x 20 3 1 18 2 y 20 3 2 18 2 z 20 3 3 18 2 v 20 3 4 18 2 w 20 3 5 18 2 x 20 2 v 4 2 w 18 31 2 x 18 27 2 a 18 22 19
+
+Symbolic representation:
+varsym identsym x commasym identsym y commasym identsym z commasym identsym v commasym identsym w semicolonsym procsym identsym a semicolonsym varsym identsym x commasym identsym y commasym identsym u commasym identsym v semicolonsym procsym identsym b semicolonsym varsym identsym y commasym identsym z commasym identsym v semicolonsym procsym identsym c semicolonsym varsym identsym y commasym identsym z semicolonsym beginsym identsym z becomessym numbersym 1 semicolonsym identsym x becomessym identsym y plussym identsym z plussym identsym w endsym semicolonsym beginsym identsym y becomessym identsym x plussym identsym u plussym identsym w semicolonsym calsym identsym c semicolonsym endsym semicolonsym beginsym identsym z becomessym numbersym 2 semicolonsym identsym u becomessym identsym z plussym identsym w semicolonsym calsym identsym b semicolonsym endsym semicolonsym beginsym identsym x becomessym numbersym 1 semicolonsym identsym y becomessym numbersym 2 semicolonsym identsym z becomessym numbersym 3 semicolonsym identsym v becomessym numbersym 4 semicolonsym identsym w becomessym numbersym 5 semicolonsym identsym x becomessym identsym v plussym identsym w semicolonsym writesym identsym x semicolonsym calsym identsym a semicolonsym endsym periodsym
+
+No errors, program is syntactically correct
+
+7 0 0 32
+7 0 0 23
+7 0 0 14
+7 0 0 4
+6 0 0 6
+1 0 0 1
+4 0 4 6
+3 0 4 5
+3 1 4 6
+11 0 0 1
+3 1 1 9
+11 0 0 1
+4 0 2 5
+2 0 0 0
+6 0 0 7
+3 0 2 5
+3 1 2 7
+11 0 0 1
+3 1 1 9
+11 0 0 1
+4 0 3 5
+5 0 0 3
+2 0 0 0
+6 0 0 8
+1 0 0 2
+4 0 1 7
+3 0 1 7
+3 1 1 9
+11 0 0 1
+4 0 2 7
+5 0 0 2
+2 0 0 0
+6 0 0 9
+1 0 0 1
+4 0 1 5
+1 0 0 2
+4 0 1 6
+1 0 0 3
+4 0 1 7
+1 0 0 4
+4 0 1 8
+1 0 0 5
+4 0 1 9
+3 0 1 8
+3 1 1 9
+11 0 0 1
+4 0 1 5
+3 0 1 5
+9 0 0 1
+5 0 0 1
+9 0 0 3
+
+Executing Program:
+0 jmp 0 0 32
+1 jmp 0 0 23
+2 jmp 0 0 14
+3 jmp 0 0 4
+4 inc 0 0 6
+5 lit 0 0 1
+6 sto 0 4 6
+7 lod 0 4 5
+8 lod 1 4 6
+9 add 0 0 1
+10 lod 1 1 9
+11 add 0 0 1
+12 sto 0 2 5
+13 rtn 0 0 0
+14 inc 0 0 7
+15 lod 0 2 5
+16 lod 1 2 7
+17 add 0 0 1
+18 lod 1 1 9
+19 add 0 0 1
+20 sto 0 3 5
+21 cal 0 0 3
+22 rtn 0 0 0
+23 inc 0 0 8
+24 lit 0 0 2
+25 sto 0 1 7
+26 lod 0 1 7
+27 lod 1 1 9
+28 add 0 0 1
+29 sto 0 2 7
+30 cal 0 0 2
+31 rtn 0 0 0
+32 inc 0 0 9
+33 lit 0 0 1
+34 sto 0 1 5
+35 lit 0 0 2
+36 sto 0 1 6
+37 lit 0 0 3
+38 sto 0 1 7
+39 lit 0 0 4
+40 sto 0 1 8
+41 lit 0 0 5
+42 sto 0 1 9
+43 lod 0 1 8
+44 lod 1 1 9
+45 add 0 0 1
+46 sto 0 1 5
+47 lod 0 1 5
+48 sio 0 0 1
+49 cal 0 0 1
+50 sio 0 0 3
+
+Program Output and Input (if prompted)
+
+ OP   Rg Lx Vl[ PC BP SP]
+JMP   0  0 32[ 32  1  0]
+        Registers:[  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+INC   0  0  9[ 33  1  9]   0   0   0   0   0   0   0   0   0
+        Registers:[  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+LIT   0  0  1[ 34  1  9]   0   0   0   0   0   0   0   0   0
+        Registers:[  1  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+STO   0  1  5[ 35  1  9]   0   0   0   0   1   0   0   0   0
+        Registers:[  1  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+LIT   0  0  2[ 36  1  9]   0   0   0   0   1   0   0   0   0
+        Registers:[  2  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+STO   0  1  6[ 37  1  9]   0   0   0   0   1   2   0   0   0
+        Registers:[  2  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+LIT   0  0  3[ 38  1  9]   0   0   0   0   1   2   0   0   0
+        Registers:[  3  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+STO   0  1  7[ 39  1  9]   0   0   0   0   1   2   3   0   0
+        Registers:[  3  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+LIT   0  0  4[ 40  1  9]   0   0   0   0   1   2   3   0   0
+        Registers:[  4  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+STO   0  1  8[ 41  1  9]   0   0   0   0   1   2   3   4   0
+        Registers:[  4  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+LIT   0  0  5[ 42  1  9]   0   0   0   0   1   2   3   4   0
+        Registers:[  5  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+STO   0  1  9[ 43  1  9]   0   0   0   0   1   2   3   4   5
+        Registers:[  5  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+LOD   0  1  8[ 44  1  9]   0   0   0   0   1   2   3   4   5
+        Registers:[  4  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+LOD   1  1  9[ 45  1  9]   0   0   0   0   1   2   3   4   5
+        Registers:[  4  5  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+ADD   0  0  1[ 46  1  9]   0   0   0   0   1   2   3   4   5
+        Registers:[  9  5  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+STO   0  1  5[ 47  1  9]   0   0   0   0   9   2   3   4   5
+        Registers:[  9  5  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+LOD   0  1  5[ 48  1  9]   0   0   0   0   9   2   3   4   5
+        Registers:[  9  5  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+9
+SIO   0  0  1[ 49  1  9]   0   0   0   0   9   2   3   4   5
+        Registers:[  9  5  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+CAL   0  0  1[  1 10  9]   0   0   0   0   9   2   3   4   5 |
+        Registers:[  9  5  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+JMP   0  0 23[ 23 10  9]   0   0   0   0   9   2   3   4   5 |
+        Registers:[  9  5  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+INC   0  0  8[ 24 10 17]   0   0   0   0   9   2   3   4   5 |  0   1   1  50   0   0   0   0
+        Registers:[  9  5  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+LIT   0  0  2[ 25 10 17]   0   0   0   0   9   2   3   4   5 |  0   1   1  50   0   0   0   0
+        Registers:[  2  5  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+STO   0  1  7[ 26 10 17]   0   0   0   0   9   2   3   2   5 |  0   1   1  50   0   0   0   0
+        Registers:[  2  5  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+LOD   0  1  7[ 27 10 17]   0   0   0   0   9   2   3   2   5 |  0   1   1  50   0   0   0   0
+        Registers:[  2  5  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+LOD   1  1  9[ 28 10 17]   0   0   0   0   9   2   3   2   5 |  0   1   1  50   0   0   0   0
+        Registers:[  2  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+ADD   0  0  1[ 29 10 17]   0   0   0   0   9   2   3   2   5 |  0   1   1  50   0   0   0   0
+        Registers:[  2  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+STO   0  2  7[ 30 10 17]   0   0   0   0   9   2   2   2   5 |  0   1   1  50   0   0   0   0
+        Registers:[  2  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+CAL   0  0  2[  2 18 17]   0   0   0   0   9   2   2   2   5 |  0   1   1  50   0   0   0   0 |
+        Registers:[  2  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+JMP   0  0 14[ 14 18 17]   0   0   0   0   9   2   2   2   5 |  0   1   1  50   0   0   0   0 |
+        Registers:[  2  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+INC   0  0  7[ 15 18 24]   0   0   0   0   9   2   2   2   5 |  0   1   1  50   0   0   0   0 |  0  10  10  31   0   0   0
+        Registers:[  2  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+LOD   0  2  5[ 16 18 24]   0   0   0   0   9   2   2   2   5 |  0   1   1  50   0   0   0   0 |  0  10  10  31   0   0   0
+        Registers:[  2  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+LOD   1  2  7[ 17 18 24]   0   0   0   0   9   2   2   2   5 |  0   1   1  50   0   0   0   0 |  0  10  10  31   0   0   0
+        Registers:[  2  2  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+ADD   0  0  1[ 18 18 24]   0   0   0   0   9   2   2   2   5 |  0   1   1  50   0   0   0   0 |  0  10  10  31   0   0   0
+        Registers:[  4  2  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+LOD   1  1  9[ 19 18 24]   0   0   0   0   9   2   2   2   5 |  0   1   1  50   0   0   0   0 |  0  10  10  31   0   0   0
+        Registers:[  4 10  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+ADD   0  0  1[ 20 18 24]   0   0   0   0   9   2   2   2   5 |  0   1   1  50   0   0   0   0 |  0  10  10  31   0   0   0
+        Registers:[ 14 10  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+STO   0  3  5[ 21 18 24]   0   0   0   0  14   2   2   2   5 |  0   1   1  50   0   0   0   0 |  0  10  10  31   0   0   0
+        Registers:[ 14 10  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+CAL   0  0  3[  3 25 24]   0   0   0   0  14   2   2   2   5 |  0   1   1  50   0   0   0   0 |  0  10  10  31   0   0   0 |
+        Registers:[ 14 10  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+JMP   0  0  4[  4 25 24]   0   0   0   0  14   2   2   2   5 |  0   1   1  50   0   0   0   0 |  0  10  10  31   0   0   0 |
+        Registers:[ 14 10  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+INC   0  0  6[  5 25 30]   0   0   0   0  14   2   2   2   5 |  0   1   1  50   0   0   0   0 |  0  10  10  31   0   0   0 |  0  18  18  22   0   0
+        Registers:[ 14 10  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+LIT   0  0  1[  6 25 30]   0   0   0   0  14   2   2   2   5 |  0   1   1  50   0   0   0   0 |  0  10  10  31   0   0   0 |  0  18  18  22   0   0
+        Registers:[  1 10  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+STO   0  4  6[  7 25 30]   0   0   0   0  14   1   2   2   5 |  0   1   1  50   0   0   0   0 |  0  10  10  31   0   0   0 |  0  18  18  22   0   0
+        Registers:[  1 10  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+LOD   0  4  5[  8 25 30]   0   0   0   0  14   1   2   2   5 |  0   1   1  50   0   0   0   0 |  0  10  10  31   0   0   0 |  0  18  18  22   0   0
+        Registers:[ 14 10  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+LOD   1  4  6[  9 25 30]   0   0   0   0  14   1   2   2   5 |  0   1   1  50   0   0   0   0 |  0  10  10  31   0   0   0 |  0  18  18  22   0   0
+        Registers:[ 14  1  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+ADD   0  0  1[ 10 25 30]   0   0   0   0  14   1   2   2   5 |  0   1   1  50   0   0   0   0 |  0  10  10  31   0   0   0 |  0  18  18  22   0   0
+        Registers:[ 15  1  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+LOD   1  1  9[ 11 25 30]   0   0   0   0  14   1   2   2   5 |  0   1   1  50   0   0   0   0 |  0  10  10  31   0   0   0 |  0  18  18  22   0   0
+        Registers:[ 15 18  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+ADD   0  0  1[ 12 25 30]   0   0   0   0  14   1   2   2   5 |  0   1   1  50   0   0   0   0 |  0  10  10  31   0   0   0 |  0  18  18  22   0   0
+        Registers:[ 33 18  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+STO   0  2  5[ 13 25 30]   0   0   0   0  14   1   2   2   5 |  0   1   1  50   0  33   0   0 |  0  10  10  31   0   0   0 |  0  18  18  22   0   0
+        Registers:[ 33 18  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+RTN   0  0  0[ 22 18 24]   0   0   0   0  14   1   2   2   5 |  0   1   1  50   0  33   0   0 |  0  10  10  31   0   0   0
+        Registers:[ 33 18  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+RTN   0  0  0[ 31 10 17]   0   0   0   0  14   1   2   2   5 |  0   1   1  50   0  33   0   0
+        Registers:[ 33 18  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+RTN   0  0  0[ 50  1  9]   0   0   0   0  14   1   2   2   5
+        Registers:[ 33 18  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+SIO   0  0  3[ 51  1  9]   0   0   0   0  14   1   2   2   5
+        Registers:[ 33 18  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+mi051467@net1547:~/pm0$

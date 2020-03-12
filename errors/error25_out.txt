@@ -1,0 +1,9 @@
+mi051467@net1547:~/pm0$ gcc hw4compiler.c -o compile && ./compile -l -a -v error25_in.txt
+Source Program:error25_in.txt
+const pi = 314159;
+var x, y;
+begin
+  x := y + 56;
+end.
+
+Error: Number too large.

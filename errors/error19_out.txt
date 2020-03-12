@@ -1,0 +1,39 @@
+mi051467@net1547:~/parser$ gcc hw3tc.c -o compile && ./compile -l -a -v error19_in.txt
+Source Program:error19_in.txt
+var x, y;
+begin
+  x := y + 56;
+.
+
+
+Lexeme Table:
+lexeme          token type
+var             29
+x               2
+,               17
+y               2
+;               18
+begin           21
+x               2
+:=              20
+y               2
++               4
+56              3
+;               18
+.               19
+
+Lexeme List:
+29 2 x 17 2 y 18 21 2 x 20 2 y 4 3 56 18 19
+
+Tokens:
+29 2 x 17 2 y 18 21 2 x 20 2 y 4 3 56 18 19
+
+Symbolic representation:
+varsym identsym x commasym identsym y semicolonsym beginsym identsym x becomessym identsym y plussym numbersym 56 semicolonsym periodsym
+
+var x, y;
+begin
+  x := y + 56;
+.
+
+  ***** Error number 19 - Incorrect symbol following statement

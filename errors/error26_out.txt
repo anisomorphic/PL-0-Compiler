@@ -1,0 +1,9 @@
+mi051467@net1547:~/pm0$ gcc hw4compiler.c -o compile && ./compile -l -a -v error26_in.txt
+Source Program:error26_in.txt
+const twelvecharss = 3;
+var x, y;
+begin
+  x := y + 56;
+end.
+
+Error: Identifier too long.

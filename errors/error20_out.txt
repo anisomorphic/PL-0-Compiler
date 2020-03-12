@@ -1,0 +1,46 @@
+mi051467@net1547:~/parser$ gcc hw3tc.c -o compile && ./compile -l -a -v error20_in.txt
+Source Program:error20_in.txt
+var x, y;
+begin
+  x := y + 56;
+  if y := 56
+end.
+
+
+Lexeme Table:
+lexeme          token type
+var             29
+x               2
+,               17
+y               2
+;               18
+begin           21
+x               2
+:=              20
+y               2
++               4
+56              3
+;               18
+if              23
+y               2
+:=              20
+56              3
+end             22
+.               19
+
+Lexeme List:
+29 2 x 17 2 y 18 21 2 x 20 2 y 4 3 56 18 23 2 y 20 3 56 22 19
+
+Tokens:
+29 2 x 17 2 y 18 21 2 x 20 2 y 4 3 56 18 23 2 y 20 3 56 22 19
+
+Symbolic representation:
+varsym identsym x commasym identsym y semicolonsym beginsym identsym x becomessym identsym y plussym numbersym 56 semicolonsym ifsym identsym y becomessym numbersym 56 endsym periodsym
+
+var x, y;
+begin
+  x := y + 56;
+  if y := 56
+end.
+
+  ***** Error number 20 - Relational operator expected

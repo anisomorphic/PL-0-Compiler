@@ -1,0 +1,5 @@
+const pi = 314159;
+var x, y;
+begin	
+  x := y + 56;
+end.

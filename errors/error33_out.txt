@@ -1,0 +1,12 @@
+mi051467@net1547:~/pm0$ gcc hw4compiler.c -o compile && ./compile -l -a -v error33_in.txt
+Source Program:error33_in.txt
+
+
+Tokens:
+
+
+Symbolic representation:
+
+
+
+  ***** Error number 33 - No code found - check the User Guide for how to write PL/0 code

@@ -1,0 +1,46 @@
+mi051467@net1547:~/parser$ gcc hw3tc.c -o compile && ./compile -l -a -v error3_in.txt
+Source Program:error3_in.txt
+const pi 3;
+var x, y;
+begin
+  x := y + 56;
+end.
+
+
+Lexeme Table:
+lexeme          token type
+const           28
+pi              2
+3               3
+;               18
+var             29
+x               2
+,               17
+y               2
+;               18
+begin           21
+x               2
+:=              20
+y               2
++               4
+56              3
+;               18
+end             22
+.               19
+
+Lexeme List:
+28 2 pi 3 3 18 29 2 x 17 2 y 18 21 2 x 20 2 y 4 3 56 18 22 19
+
+Tokens:
+28 2 pi 3 3 18 29 2 x 17 2 y 18 21 2 x 20 2 y 4 3 56 18 22 19
+
+Symbolic representation:
+constsym identsym pi numbersym 3 semicolonsym varsym identsym x commasym identsym y semicolonsym beginsym identsym x becomessym identsym y plussym numbersym 56 semicolonsym endsym periodsym
+
+const pi 3;
+var x, y;
+begin
+  x := y + 56;
+end.
+
+  ***** Error number 3 - Identifier must be followed by =
